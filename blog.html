@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Villages Weekly — local blog</title>
+<style>
+:root{--navy:#0B3D5C;--teal:#0E7C86;--gold:#C9971C;--bg:#F4F7F9;--ink:#1B2631;--grey:#566573;--line:#D9E2E7}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);font-size:18px;line-height:1.6}
+.wrap{max-width:760px;margin:0 auto;padding:0 18px}
+header{background:var(--navy);color:#fff;padding:22px 0}
+.htop{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.logo{font-size:24px;font-weight:800}.logo span{color:var(--gold)}
+.nav a{color:#BBD3DE;font-size:15px;margin-left:16px;text-decoration:none}.nav a:hover{color:#fff}
+.tag{color:#BBD3DE;font-size:15px;margin-top:4px}
+.post{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px 26px;margin:22px 0}
+.post h2{font-size:24px;color:var(--navy)}
+.date{color:var(--grey);font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;margin:2px 0 12px}
+.post h3{font-size:19px;color:var(--teal);margin:18px 0 6px}
+.post ul{margin:4px 0 4px 22px}.post li{margin:6px 0}
+.post a{color:var(--teal)}
+.spons{background:#FFF8E8;border:1px dashed #E5C76A;border-radius:10px;padding:12px 14px;margin:16px 0}
+.spons .l{font-size:12px;font-weight:800;color:var(--gold);letter-spacing:.5px}
+.demoNote{background:#FFF1CF;color:#7a5b00;font-size:13px;text-align:center;padding:7px}
+footer{color:var(--grey);font-size:14px;padding:24px 0;text-align:center}
+</style></head>
+<body>
+<div class="demoNote" id="demoNote" style="display:none">PREVIEW — sample post. Real posts auto-write each week once the agent runs.</div>
+<header><div class="wrap">
+  <div class="htop">
+    <div class="logo">The Villages <span>Weekly</span></div>
+    <div class="nav"><a href="https://thevillagesfood.com">🍽️ Food</a><a href="https://thevillagescatalogue.com">🛠️ Catalogue</a><a href="https://thevillagesfood.com/town-square-live-music-guide.html">🎵 Square Music Guide</a></div>
+  </div>
+  <div class="tag">New restaurants, events &amp; what's worth knowing — one post a week, shared on both sites.</div>
+</div></header>
+
+<div class="wrap" id="posts"></div>
+<footer class="wrap">The Villages Weekly · auto-written from local data · links back to original sources.</footer>
+
+<script>
+const SAMPLE={posts:[{
+  title:"This Week in The Villages",
+  date:"This week",
+  body:"<p>Loading the latest post…</p>",
+  sample:true
+}]};
+function render(b){
+  const posts=(b.posts&&b.posts.length)?b.posts:SAMPLE.posts;
+  if(posts.some(p=>p.sample)) document.getElementById('demoNote').style.display='block';
+  document.getElementById('posts').innerHTML=posts.map((p,i)=>`
+    <article class="post">
+      <h2>${p.title}</h2>
+      <div class="date">${p.date||''}</div>
+      ${p.body||''}
+      ${i===0?'<div class="spons"><div class="l">SPONSORED · YOUR AD HERE</div>A local business pays for this spot in the weekly post — your blog revenue line.</div>':''}
+    </article>`).join('');
+}
+fetch('blog.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(b=>render(b||SAMPLE)).catch(()=>render(SAMPLE));
+</script>
+</body></html>

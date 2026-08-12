@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Villages Food — What's good to eat in The Villages, right now</title>
+<style>
+  :root{
+    --navy:#0B3D5C; --teal:#0E7C86; --green:#2E7D32; --gold:#C9971C;
+    --bg:#F4F7F9; --card:#fff; --ink:#1B2631; --grey:#566573; --line:#D9E2E7;
+    --featured:#FFF6E0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);font-size:17px;line-height:1.5}
+  a{color:var(--teal);text-decoration:none}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 18px}
+  /* header */
+  header{background:var(--navy);color:#fff;padding:16px 0}
+  .top{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+  .logo{font-size:24px;font-weight:800;letter-spacing:.3px}
+  .logo span{color:var(--gold)}
+  .tagline{color:#BBD3DE;font-size:15px}
+  .clock{background:rgba(255,255,255,.12);padding:8px 14px;border-radius:999px;font-size:15px;font-weight:600}
+  .clock b{color:#9be8b0}
+  /* hero */
+  .hero{background:linear-gradient(180deg,#0E7C86,#0B3D5C);color:#fff;padding:26px 0 22px}
+  .hero h1{font-size:30px;line-height:1.2;margin-bottom:8px}
+  .hero p{color:#dbeef1;font-size:18px;max-width:760px}
+  .search{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
+  .search input{flex:1;min-width:240px;padding:14px 16px;border:none;border-radius:10px;font-size:17px}
+  .search button{background:var(--gold);color:#3a2c00;border:none;font-weight:700;font-size:17px;padding:14px 22px;border-radius:10px;cursor:pointer}
+  /* weather strip */
+  .wx{background:#EAF3F6;border-bottom:1px solid var(--line);padding:10px 0;font-size:15px;color:var(--navy)}
+  .wx b{color:var(--green)}
+  /* filter bar */
+  .filters{position:sticky;top:0;z-index:30;background:#fff;border-bottom:1px solid var(--line);padding:12px 0;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+  .frow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  select{padding:11px 12px;border:1.5px solid var(--line);border-radius:9px;font-size:15px;background:#fff;color:var(--ink)}
+  .toggle{display:inline-flex;align-items:center;gap:7px;border:1.5px solid var(--line);border-radius:999px;padding:9px 14px;cursor:pointer;font-size:15px;font-weight:600;user-select:none;background:#fff}
+  .toggle.on{background:var(--teal);color:#fff;border-color:var(--teal)}
+  .toggle .dot{width:9px;height:9px;border-radius:50%;background:#bbb}
+  .toggle.on .dot{background:#9be8b0}
+  .count{margin-left:auto;color:var(--grey);font-size:15px}
+  /* sections */
+  section{padding:24px 0}
+  h2{font-size:22px;color:var(--navy);margin-bottom:4px}
+  .sub{color:var(--grey);margin-bottom:16px;font-size:15px}
+  /* entertainment */
+  .ent{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .square{background:var(--navy);color:#fff;border-radius:12px;padding:16px}
+  .square h3{font-size:18px;margin-bottom:2px}
+  .square .when{color:#9be8b0;font-size:14px;font-weight:600;margin-bottom:8px}
+  .square .act{font-size:16px;font-weight:700}
+  .square .genre{color:#cde0e6;font-size:14px}
+  /* cards */
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 16px 14px;position:relative;transition:.15s}
+  .card.featured{background:var(--featured);border-color:#EAD08A;box-shadow:0 4px 14px rgba(201,151,28,.15)}
+  .card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.08)}
+  .badge{position:absolute;top:14px;right:14px;font-size:12px;font-weight:800;padding:4px 10px;border-radius:999px;text-transform:uppercase;letter-spacing:.4px}
+  .b-featured{background:var(--gold);color:#3a2c00}
+  .b-pro{background:#DDEBF0;color:var(--navy)}
+  .cname{font-size:20px;font-weight:800;padding-right:80px}
+  .meta{color:var(--grey);font-size:15px;margin:3px 0 10px}
+  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:8px}
+  .pill{font-size:13px;font-weight:700;padding:4px 9px;border-radius:7px}
+  .open{background:#E4F4E6;color:#1d6322}
+  .closed{background:#FBE6E6;color:#9b2222}
+  .hh{background:#FFF1CF;color:#7a5b00}
+  .cart{background:#E7F0FF;color:#13408f}
+  .stars{color:var(--gold);font-weight:800}
+  .hours{font-size:14px;color:var(--ink)}
+  .hhinfo{font-size:14px;color:#7a5b00;background:#FFF8E8;border:1px dashed #E5C76A;border-radius:8px;padding:7px 10px;margin-top:6px}
+  .none{text-align:center;color:var(--grey);padding:40px;font-size:17px}
+  /* claim CTA */
+  .claim{background:var(--navy);color:#fff;border-radius:14px;padding:22px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+  .claim h2{color:#fff}
+  .claim p{color:#cde0e6;font-size:15px;max-width:560px}
+  .btn{background:var(--gold);color:#3a2c00;border:none;font-weight:800;font-size:16px;padding:13px 22px;border-radius:10px;cursor:pointer}
+  .btn.alt{background:#fff;color:var(--navy)}
+  /* newsletter */
+  .news{background:#E8F3E9;border:1px solid #BFE0C4;border-radius:14px;padding:22px;text-align:center}
+  .news h2{color:var(--green)}
+  .news .f{display:flex;gap:10px;max-width:480px;margin:14px auto 0;flex-wrap:wrap}
+  .news input{flex:1;min-width:200px;padding:13px;border:1.5px solid #BFE0C4;border-radius:10px;font-size:16px}
+  /* modal */
+  .modal{position:fixed;inset:0;background:rgba(11,61,92,.55);display:none;align-items:center;justify-content:center;z-index:100;padding:18px}
+  .modal.show{display:flex}
+  .box{background:#fff;border-radius:16px;max-width:560px;width:100%;padding:26px;max-height:90vh;overflow:auto}
+  .box h2{margin-bottom:6px}
+  .tier{border:2px solid var(--line);border-radius:12px;padding:14px;margin-top:12px}
+  .tier.best{border-color:var(--gold);background:var(--featured)}
+  .tier h3{font-size:18px;color:var(--navy);display:flex;justify-content:space-between}
+  .tier .price{color:var(--gold);font-weight:800}
+  .tier ul{margin:8px 0 0 18px;font-size:15px;color:var(--grey)}
+  .x{float:right;font-size:26px;cursor:pointer;color:var(--grey);line-height:1}
+  footer{background:var(--navy);color:#a9c6d3;padding:22px 0;font-size:14px;margin-top:20px}
+  footer b{color:#fff}
+  .demoNote{background:#FFF1CF;color:#7a5b00;font-size:13px;text-align:center;padding:7px}
+  @media(max-width:760px){.grid,.ent{grid-template-columns:1fr}.hero h1{font-size:24px}}
+
+  .buzz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .bz{background:#fff;border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:10px;padding:13px}
+  .bz .dt{color:var(--grey);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
+  .bz a{font-weight:700;font-size:15px;display:block;margin-top:3px;color:var(--ink)}
+  .bz a:hover{color:var(--teal)}
+  @media(max-width:760px){.buzz{grid-template-columns:1fr}}
+
+  .ups{display:flex;flex-direction:column;gap:8px}
+  .up{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 13px}
+  .up .tag{font-size:11px;font-weight:800;padding:3px 8px;border-radius:7px;white-space:nowrap;text-transform:uppercase;letter-spacing:.3px}
+  .t-open{background:#E4F4E6;color:#1d6322}.t-close{background:#FBE6E6;color:#9b2222}.t-fix{background:#EAE3F7;color:#5b3aa6}.t-news{background:#E7F0FF;color:#13408f}
+  .up a{font-weight:700;font-size:15px;color:var(--ink)}.up a:hover{color:var(--teal)}
+
+  /* Ask Susan — prominent band */
+  .ask-band{background:linear-gradient(135deg,#E9BC44 0%,#C9971C 55%,#B5851A 100%);padding:30px 0;border-top:3px solid #fff3d6;box-shadow:0 8px 24px rgba(11,61,92,.20);position:relative;z-index:5}
+  .ask-band-in{display:grid;grid-template-columns:1fr 1.15fr;gap:28px;align-items:center}
+  .ask-band-left{display:flex;gap:20px;align-items:center}
+  .ask-band-photo{width:108px;height:108px;border-radius:50%;object-fit:cover;border:4px solid #fff;box-shadow:0 5px 16px rgba(11,61,92,.30);flex-shrink:0}
+  .ask-kicker{display:inline-block;background:var(--navy);color:#fff;font-size:12px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;padding:5px 13px;border-radius:999px;margin-bottom:9px}
+  .ask-band-h{font-size:44px;line-height:1;color:var(--navy);margin:0 0 8px;font-weight:800;letter-spacing:-.5px}
+  .ask-band-sub{color:#3d2e00;font-size:18px;line-height:1.4;margin:0;max-width:430px;font-weight:600}
+  .ask-band-form{background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.75);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px;box-shadow:0 4px 14px rgba(11,61,92,.12)}
+  .ask-band-row{display:flex;gap:10px;flex-wrap:wrap}
+  .ask-band-form input[type=text],.ask-band-form input[type=email]{flex:1;min-width:160px;padding:13px 14px;border:1px solid #e0c47a;border-radius:10px;font-size:16px;font-family:inherit;color:var(--ink);background:#fff}
+  .ask-band-form textarea{width:100%;padding:13px 14px;border:1px solid #e0c47a;border-radius:10px;font-size:16px;font-family:inherit;color:var(--ink);background:#fff;resize:vertical}
+  .ask-band-form input:focus,.ask-band-form textarea:focus{outline:none;border-color:var(--navy)}
+  .ask-band-btn{align-self:stretch;background:var(--navy);color:#fff;border:none;font-weight:800;font-size:18px;padding:15px 22px;border-radius:10px;cursor:pointer;letter-spacing:.3px;transition:.15s}
+  .ask-band-btn:hover{background:#0a3450;transform:translateY(-1px);box-shadow:0 6px 18px rgba(11,61,92,.3)}
+  .ask-hp{position:absolute!important;left:-9999px;top:-9999px}
+  .ask-band-thanks{background:#fff;border-radius:12px;padding:18px 20px;color:var(--navy);font-size:17px;line-height:1.5;font-weight:600;box-shadow:0 4px 14px rgba(11,61,92,.12)}
+  @media(max-width:760px){.ask-band-in{grid-template-columns:1fr;gap:18px}.ask-band-h{font-size:32px}.ask-band-photo{width:84px;height:84px}}
+</style>
+</head>
+<body>
+
+
+
+<header>
+  <div class="wrap top">
+    <div>
+      <div class="logo">The Villages <span>Food</span></div>
+      <div class="tagline">What's good to eat in The Villages, right now.</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap"><a href='https://thevillagescatalogue.com' style='color:#fff;background:rgba(255,255,255,.15);padding:8px 14px;border-radius:999px;font-weight:700;font-size:15px;text-decoration:none'>🔧 Services Directory</a><a href='/blog' style='color:#fff;background:rgba(255,255,255,.15);padding:8px 14px;border-radius:999px;font-weight:700;font-size:15px;text-decoration:none'>📝 Blog</a><div class="clock" id="clock">🕐 —</div></div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <h1>Find what's open, what's on special, and who's playing tonight.</h1>
+    <p>Every restaurant, bar &amp; cafe in The Villages — with live hours, a happy-hour finder, golf-cart-accessible spots, and tonight's free entertainment at the town squares.</p>
+    <div class="search">
+      <input id="q" type="text" placeholder="Search a restaurant, cuisine, or dish…" oninput="render()">
+      <button onclick="render()">Search</button>
+    </div>
+  </div>
+</div>
+
+
+<section class="ask-band" id="ask-susan">
+  <div class="wrap ask-band-in">
+    <div class="ask-band-left">
+      <img src="susan-ask.jpg" alt="Susan, your Villages insider" class="ask-band-photo">
+      <div>
+        <span class="ask-kicker">Your Villages insider &mdash; on call</span>
+        <h2 class="ask-band-h">Ask Susan</h2>
+        <p class="ask-band-sub">Got a question about The Villages? Need to know what&rsquo;s good or who to call? Ask me &mdash; I probably know a guy.</p>
+      </div>
+    </div>
+    <form name="ask-susan" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" class="ask-band-form" id="askSusanForm" action="/">
+      <input type="hidden" name="form-name" value="ask-susan">
+      <p class="ask-hp"><label>Leave this empty if you're human: <input name="bot-field"></label></p>
+      <div class="ask-band-row">
+        <input type="text" name="name" placeholder="Your name" required>
+        <input type="email" name="email" placeholder="your@email.com" required>
+      </div>
+      <textarea name="question" rows="2" placeholder="Best brunch? A patio with the right breeze? Where to take the grandkids? Ask away…" required></textarea>
+      <button type="submit" class="ask-band-btn">Ask Susan &rarr;</button>
+    </form>
+    <div class="ask-band-thanks" id="askSusanThanks" style="display:none">
+      <strong>Thanks, neighbor!</strong> Susan got your question and she'll get back to you. Now go enjoy yourself. &mdash; S.
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var f=document.getElementById('askSusanForm');
+  if(!f) return;
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var body=new URLSearchParams(new FormData(f)).toString();
+    var done=function(){f.style.display='none';document.getElementById('askSusanThanks').style.display='block';};
+    fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body}).then(done).catch(done);
+  });
+})();
+</script>
+
+<div class="wx"><div class="wrap" id="wx">🛺 Real Villages spots, all golf-cart accessible — always call ahead for tonight's hours &amp; specials.</div></div>
+
+<div class="filters">
+  <div class="wrap frow">
+    <select id="area" onchange="render()">
+      <option value="">📍 All areas</option>
+    </select>
+    <select id="cat" onchange="render()">
+      <option value="">🍽️ All cuisines</option>
+    </select>
+    <div class="toggle" id="t-open" onclick="tog(this)"><span class="dot"></span>Open now</div>
+    <div class="toggle" id="t-hh" onclick="tog(this)"><span class="dot"></span>Happy hour now</div>
+    <div class="toggle" id="t-cart" onclick="tog(this)"><span class="dot"></span>🛺 Golf-cart accessible</div>
+    <div class="count" id="count"></div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <h2>Tonight's Entertainment — Free live music at the squares</h2>
+    <div class="sub">Every square, every night — free. Tap your square for the official lineup.</div>
+    <div class="ent" id="ent"></div>
+  </div>
+</section>
+
+
+<section style="padding-top:4px">
+  <div class="wrap">
+    <h2>📰 Villages Buzz — local headlines</h2>
+    <div class="sub">Handy local links — always pointing back to the original source.</div>
+    <div class="buzz" id="buzz"></div>
+  </div>
+</section>
+
+
+<section style="padding-top:4px"><div class="wrap">
+  <h2>📣 Updates — openings, closings &amp; corrections</h2>
+  <div class="sub">What changed this week. We post closings and fix our mistakes here too.</div>
+  <div class="ups" id="ups"></div>
+</div></section>
+
+<section style="padding-top:4px">
+  <div class="wrap">
+    <h2>Restaurants &amp; Bars</h2>
+    <div class="sub">Tap a filter above. Featured spots support the site — and get top placement.</div>
+    <div class="grid" id="grid"></div>
+    <div class="none" id="none" style="display:none">No spots match those filters. Try clearing one.</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap claim">
+    <div>
+      <h2>Own a restaurant in The Villages?</h2>
+      <p>You're probably already listed. Claim your page to add your menu, photos, and happy-hour specials — or feature a daily deal in front of 60,000+ hungry locals.</p>
+    </div>
+    <button class="btn" onclick="openModal()">Claim / Upgrade your listing →</button>
+  </div>
+</section>
+
+<section style="padding-top:4px">
+  <div class="wrap news">
+    <h2>📬 The Villages Dining Digest</h2>
+    <p class="sub" style="margin-bottom:0">One email a week: new spots, this week's best happy hours, and who's playing the squares. Free.</p>
+    <div class="f">
+      <input id="email" type="email" placeholder="your@email.com">
+      <button class="btn" onclick="subscribe()">Subscribe free</button>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:4px">
+  <div class="wrap">
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 24px;display:flex;gap:22px;align-items:center;flex-wrap:wrap">
+      <img src="susan.jpg" alt="Susan, your Villages insider" width="150" height="150" style="width:150px;height:150px;border-radius:50%;object-fit:cover;border:4px solid var(--gold);flex-shrink:0;box-shadow:0 4px 14px rgba(11,61,92,.18)">
+      <div style="flex:1;min-width:250px">
+        <h2 style="margin-bottom:6px">Meet Susan &mdash; your Villages insider</h2>
+        <p style="color:var(--grey);font-size:16px;line-height:1.6;margin:0">Hi, I'm Susan &mdash; a retired principal who swapped Ohio winters for golf carts, pickleball, and happy hours in The Villages. I've spent years getting to know every square, patio, and live-music night worth your time, and I'm the local behind this site and its weekly blog. When you want to know what's actually good &mdash; or who to call &mdash; I'm your neighbor.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <b>The Villages Food</b> — a Needed · Usable · Income-generating local asset.<br>
+    Live data sources: Google Places (listings &amp; hours), Ticketmaster Discovery (events), weather.gov (forecast). Demo data shown here for illustration.
+  </div>
+</footer>
+
+<!-- modal -->
+<div class="modal" id="modal">
+  <div class="box">
+    <span class="x" onclick="closeModal()">×</span>
+    <h2>Claim your listing</h2>
+    <div class="sub">Pick a plan. Self-serve checkout via Stripe in the live version — your page upgrades instantly.</div>
+    <div class="tier">
+      <h3>Free <span class="price">$0</span></h3>
+      <ul><li>Basic listing: name, address, hours, map pin</li></ul>
+    </div>
+    <div class="tier">
+      <h3>Pro <span class="price">$29/mo</span></h3>
+      <ul><li>Menu, photo gallery, website &amp; phone links</li><li>Happy-hour specials shown in the finder</li></ul>
+    </div>
+    <div class="tier best">
+      <h3>Featured <span class="price">$99/mo</span></h3>
+      <ul><li>Everything in Pro, plus a gold "Featured" badge</li><li>Top placement in results &amp; category</li><li>One sponsored deal in the weekly Dining Digest</li></ul>
+    </div>
+    <button class="btn" style="margin-top:16px;width:100%" onclick="alert('Demo: in the live site this opens Stripe Checkout and upgrades the listing automatically.');">Continue to checkout →</button>
+  </div>
+</div>
+
+<script>
+// ---------- real local data (verified Aug 2026) ----------
+const AREAS = ["Lake Sumter Landing","Brownwood Paddock Square","Spanish Springs"];
+let R = [
+  {n:"The Angler's Club",c:"Fine Dining",a:"Lake Sumter Landing",r:4.7,p:"$$$",cart:true,tier:"free",o:null,close:null,hh:null,hhtxt:""},
+  {n:"City Fire American Oven & Bar",c:"American",a:"Lake Sumter Landing",r:4.3,p:"$$",cart:true,tier:"free",o:null,close:null,hh:null,hhtxt:""},
+  {n:"Chop House at Lake Sumter",c:"Steakhouse",a:"Lake Sumter Landing",r:4.4,p:"$$",cart:true,tier:"free",o:null,close:null,hh:null,hhtxt:""},
+  {n:"VKI Japanese Steakhouse",c:"Japanese",a:"Lake Sumter Landing",r:4.2,p:"$$",cart:true,tier:"free",o:null,close:null,hh:null,hhtxt:""},
+  {n:"Bravo Pizza",c:"Pizza",a:"Lake Sumter Landing",r:4.3,p:"$",cart:true,tier:"free",o:null,close:null,hh:null,hhtxt:""},
+  {n:"The Flying Biscuit Cafe",c:"Breakfast",a:"Lake Sumter Landing",r:4.2,p:"$",cart:true,tier:"free",o:null,close:null,hh:null,hhtxt:""},
+  {n:"Starbucks (Old Mill Run)",c:"Cafe",a:"Lake Sumter Landing",r:4.5,p:"$",cart:true,tier:"free",o:null,close:null,hh:null,hhtxt:""},
+  {n:"Haagen-Dazs",c:"Ice Cream",a:"Lake Sumter Landing",r:4.1,p:"$$",cart:true,tier:"free",o:null,close:null,hh:null,hhtxt:""},
+  {n:"Kilwins",c:"Sweets",a:"Spanish Springs",r:4.1,p:"$$",cart:true,tier:"free",o:null,close:null,hh:null,hhtxt:""},
+  {n:"Darlin's Sweet Shoppe",c:"Sweets",a:"Spanish Springs",r:4.4,p:"$",cart:true,tier:"free",o:null,close:null,hh:null,hhtxt:""},
+  {n:"McGrady's Pub",c:"Bar / Pub",a:"Spanish Springs",r:4.0,p:"$$",cart:true,tier:"free",o:null,close:null,hh:null,hhtxt:""},
+  {n:"Applebee's Grill + Bar",c:"American",a:"Spanish Springs",r:3.8,p:"$",cart:true,tier:"free",o:null,close:null,hh:null,hhtxt:""},
+  {n:"Margarita Republic",c:"Caribbean",a:"Spanish Springs",r:4.0,p:"$$",cart:true,tier:"free",o:null,close:null,hh:null,hhtxt:""},
+  {n:"Flippers Pizzeria",c:"Pizza",a:"Spanish Springs",r:4.1,p:"$",cart:true,tier:"free",o:null,close:null,hh:null,hhtxt:""},
+  {n:"Bella Vita Italian Steakhouse",c:"Italian",a:"Spanish Springs",r:4.1,p:"$$",cart:true,tier:"free",o:11,close:21,hh:null,hhtxt:""},
+  {n:"Coastal Del Mar",c:"Seafood",a:"Spanish Springs",r:3.8,p:"$$",cart:true,tier:"free",o:null,close:null,hh:null,hhtxt:""},
+  {n:"Bluefin Grill & Bar",c:"Seafood",a:"Brownwood Paddock Square",r:4.6,p:"$$",cart:true,tier:"free",o:null,close:null,hh:null,hhtxt:""},
+  {n:"Prima Italian Steakhouse",c:"Steakhouse",a:"Brownwood Paddock Square",r:4.4,p:"$$",cart:true,tier:"free",o:null,close:null,hh:null,hhtxt:""},
+  {n:"Wolfgang Puck Kitchen + Bar",c:"American",a:"Brownwood Paddock Square",r:4.0,p:"$$",cart:true,tier:"free",o:null,close:null,hh:null,hhtxt:""},
+  {n:"World of Beer",c:"Bar / Pub",a:"Brownwood Paddock Square",r:4.4,p:"$",cart:true,tier:"free",o:null,close:null,hh:null,hhtxt:""},
+  {n:"Harvest Restaurant & Bar",c:"Wine Bar",a:"Brownwood Paddock Square",r:4.4,p:"$$",cart:true,tier:"free",o:null,close:null,hh:null,hhtxt:""},
+  {n:"Scooples Ice Cream Parlor",c:"Ice Cream",a:"Brownwood Paddock Square",r:4.5,p:"$",cart:true,tier:"free",o:null,close:null,hh:null,hhtxt:""},
+  {n:"Square 1 Burgers & Bar",c:"Burgers",a:"Brownwood Paddock Square",r:4.1,p:"$",cart:true,tier:"free",o:null,close:null,hh:null,hhtxt:""},
+  {n:"Five Guys",c:"Burgers",a:"Brownwood Paddock Square",r:4.0,p:"$",cart:true,tier:"free",o:null,close:null,hh:null,hhtxt:""},
+  {n:"McAlister's Deli",c:"Deli",a:"Brownwood Paddock Square",r:4.0,p:"$",cart:true,tier:"free",o:null,close:null,hh:null,hhtxt:""},
+  {n:"Cody's Original Roadhouse",c:"American",a:"Brownwood Paddock Square",r:3.6,p:"$$",cart:true,tier:"free",o:null,close:null,hh:null,hhtxt:""},
+  {n:"Gator's Dockside",c:"Sports Bar",a:"Brownwood Paddock Square",r:3.7,p:"$",cart:true,tier:"free",o:null,close:null,hh:null,hhtxt:""},
+  {n:"Ay! Jalisco",c:"Mexican",a:"Spanish Springs",r:3.5,p:"$",cart:true,tier:"free",o:11,close:20.5,hh:null,hhtxt:""},
+  {n:"Sawgrass Tavern",c:"Bar / Pub",a:"Sawgrass Grove",r:3.9,p:"$$",cart:true,tier:"free",o:null,close:null,hh:null,hhtxt:""},
+  {n:"Little Fin Seafood at Sawgrass Grove",c:"Seafood",a:"Sawgrass Grove",r:3.1,p:"$",cart:true,tier:"free",o:11,close:21,hh:null,hhtxt:""},
+  {n:"Prime + Ember Signature Steakhouse",c:"Steakhouse",a:"Eastport",r:3.5,p:"$$$",cart:true,tier:"free",o:11,close:21,hh:null,hhtxt:""},
+  {n:"Yamas",c:"Mediterranean",a:"Eastport",r:4.0,p:"$$",cart:true,tier:"free",o:null,close:null,hh:null,hhtxt:""},
+  {n:"Frenchy's Wood-Fired at Sawgrass Grove",c:"Pizza",a:"Sawgrass Grove",r:3.3,p:"$",cart:true,tier:"free",o:null,close:null,hh:null,hhtxt:""},
+  {n:"TooJay's Deli",c:"Deli",a:"Lake Sumter Landing",r:3.8,p:"$$",cart:true,tier:"free",o:null,close:null,hh:null,hhtxt:""},
+  {n:"Johnny Rockets",c:"Burgers",a:"Lake Sumter Landing",r:4.2,p:"$$",cart:true,tier:"free",o:null,close:null,hh:null,hhtxt:""},
+  {n:"The Legacy Restaurant at Nancy Lopez Country Club",c:"American",a:"Country Clubs",r:4.3,p:"$$",cart:true,tier:"free",o:null,close:null,hh:null,hhtxt:""},
+  {n:"Oakwood Smokehouse & Grill",c:"BBQ",a:"Lady Lake (441)",r:4.6,p:"$$",cart:true,tier:"free",o:null,close:null,hh:null,hhtxt:""},
+  {n:"RedSauce",c:"Italian",a:"Lake Sumter Landing",r:4.3,p:"$$",cart:true,tier:"free",o:null,close:null,hh:null,hhtxt:""},
+  {n:"Bonefish Grill",c:"Seafood",a:"Pinellas Plaza (466A)",r:4.2,p:"$$",cart:true,tier:"free",o:null,close:null,hh:null,hhtxt:""},
+  {n:"Katie Belle's",c:"American",a:"Spanish Springs",r:3.5,p:"$$",cart:true,tier:"free",o:null,close:null,hh:null,hhtxt:""},
+  {n:"The Natives at Lake Okahumpka",c:"American",a:"Lake Okahumpka",r:4.3,p:"$$",cart:true,tier:"free",o:null,close:null,hh:null,hhtxt:""},
+];
+let ENT = [
+  {sq:"Spanish Springs",act:"Free live music every night",genre:'<a href="https://www.thevillagesentertainment.com/spanish-springs/" target="_blank" rel="noopener">See tonight\'s lineup →</a>'},
+  {sq:"Lake Sumter Landing",act:"Free live music every night",genre:'<a href="https://www.thevillagesentertainment.com/lake-sumter-landing/" target="_blank" rel="noopener">See tonight\'s lineup →</a>'},
+  {sq:"Brownwood Paddock Square",act:"Free live music every night",genre:'<a href="https://www.thevillagesentertainment.com/brownwood/" target="_blank" rel="noopener">See tonight\'s lineup →</a>'},
+];
+
+// ---------- helpers ----------
+function now(){ return new Date(); }
+function curHour(){ const d=now(); return d.getHours()+d.getMinutes()/60; }
+function isOpen(x){ if(x.o==null) return false; const h=curHour(); return h>=x.o && h<x.close; }
+function inHH(x){ if(!x.hh) return false; const h=curHour(); return h>=x.hh[0] && h<x.hh[1]; }
+function fmtH(h){ const hh=Math.floor(h)%24; const ap=hh<12?"am":"pm"; let d=hh%12; if(d===0)d=12; return d+ap; }
+const filt={open:false,hh:false,cart:false};
+function tog(el){ const k=el.id.split('-')[1]; filt[k]=!filt[k]; el.classList.toggle('on'); render(); }
+
+// populate selects
+const areaSel=document.getElementById('area'), catSel=document.getElementById('cat');
+[...new Set(R.map(x=>x.a))].sort().forEach(a=>{const o=document.createElement('option');o.value=a;o.textContent="📍 "+a;areaSel.appendChild(o);});
+[...new Set(R.map(x=>x.c))].sort().forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent="🍽️ "+c;catSel.appendChild(o);});
+
+// entertainment
+document.getElementById('ent').innerHTML = ENT.map(e=>`
+  <div class="square">
+    <h3>${e.sq}</h3>
+    <div class="when">Nightly · 5–9pm (6–10 summer) · free</div>
+    <div class="act">🎵 ${e.act}</div>
+    <div class="genre">${e.genre}</div>
+  </div>`).join('');
+
+let NEWS = [
+  {title:"Villages restaurant & dining news", date:"Villages-News", link:"https://www.villages-news.com/"},
+  {title:"Tonight's entertainment on all the squares", date:"Official", link:"https://www.thevillagesentertainment.com/nightly-entertainment/"},
+  {title:"Guide: live music on the town squares", date:"Our guide", link:"https://thevillagesfood.com/town-square-live-music-guide.html"},
+  {title:"The Villages Weekly — our local blog", date:"Weekly", link:"https://thevillagesfood.com/blog.html"},
+  {title:"Brownwood Farmers Market — Saturdays 9am–1pm", date:"Weekly", link:"https://www.thevillages.com/whats-new/health-wellness/visit-brownwood-farmers-market/"},
+  {title:"Market Nights on the squares — first full week each month", date:"Monthly", link:"https://www.thevillagesentertainment.com/hometown-market/"},
+];
+function renderBuzz(){
+  document.getElementById('buzz').innerHTML = NEWS.slice(0,6).map(n=>
+    `<div class="bz"><div class="dt">${n.date||'Local'}</div><a href="${n.link||'#'}" target="_blank" rel="noopener">${n.title}</a></div>`).join('');
+}
+renderBuzz();
+
+
+// clock
+function tick(){
+  const d=now();
+  document.getElementById('clock').innerHTML = "🕐 "+d.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})+" · <b>"+R.length+" local spots</b>";
+}
+setInterval(tick,1000); tick();
+
+// render cards
+function render(){
+  const q=document.getElementById('q').value.toLowerCase();
+  const a=areaSel.value, c=catSel.value;
+  let list=R.filter(x=>{
+    if(q && !(x.n.toLowerCase().includes(q)||x.c.toLowerCase().includes(q))) return false;
+    if(a && x.a!==a) return false;
+    if(c && x.c!==c) return false;
+    if(filt.open && !isOpen(x)) return false;
+    if(filt.hh && !inHH(x)) return false;
+    if(filt.cart && !x.cart) return false;
+    return true;
+  });
+  // featured first, then rating
+  const rank={featured:0,pro:1,free:2};
+  list.sort((u,v)=> (rank[u.tier]-rank[v.tier]) || (v.r-u.r));
+  document.getElementById('count').textContent = list.length+" of "+R.length+" spots";
+  document.getElementById('none').style.display = list.length?'none':'block';
+  document.getElementById('grid').innerHTML = list.map(x=>{
+    const open=isOpen(x), hhnow=inHH(x);
+    const badge = x.tier==='featured'?'<div class="badge b-featured">★ Featured</div>': x.tier==='pro'?'<div class="badge b-pro">Pro</div>':'';
+    return `<div class="card ${x.tier==='featured'?'featured':''}">
+      ${badge}
+      <div class="cname">${x.n}</div>
+      <div class="meta">${x.c} · ${x.p} · ${x.a}</div>
+      <div class="row">
+        ${x.o!=null?`<span class="pill ${open?'open':'closed'}">${open?'● Open now':'● Closed'}</span>`:''}
+        <span class="stars">★ ${x.r.toFixed(1)}</span>
+        ${x.cart?'<span class="pill cart">🛺 Cart-accessible</span>':''}
+        ${hhnow?'<span class="pill hh">🍹 Happy hour NOW</span>':''}
+      </div>
+      <div class="hours">${x.o!=null?`Today: ${fmtH(x.o)} – ${fmtH(x.close)}`:`Hours vary — check before you ride over`}</div>
+      ${x.hh?`<div class="hhinfo">🍹 Happy hour: ${x.hhtxt}</div>`:''}
+    </div>`;
+  }).join('');
+}
+render();
+
+// modal + actions
+function openModal(){document.getElementById('modal').classList.add('show');}
+function closeModal(){document.getElementById('modal').classList.remove('show');}
+document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal();});
+function subscribe(){
+  const e=document.getElementById('email').value;
+  if(e && e.includes('@')){alert("Demo: '"+e+"' would be added to the Dining Digest (Beehiiv) in the live site. 🎉");document.getElementById('email').value='';}
+  else alert("Please enter a valid email.");
+}
+
+// ---------- live data (optional) ----------
+// If the agent has produced restaurants.json next to this file, use it.
+// Falls back silently to the sample data above when offline / not present.
+fetch('restaurants.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(d=>{
+  if(!d) return;
+  if(Array.isArray(d.restaurants) && d.restaurants.length){
+    R = d.restaurants.map(x=>({
+      n:x.n, c:x.c||'Restaurant', a:x.a||x.addr||'The Villages',
+      r:x.r||0, p:x.p||'$$', cart:x.cart!==false,
+      tier:x.tier||'free', o:x.o!=null?x.o:11, close:x.close!=null?x.close:22,
+      hh:x.hh||null, hhtxt:x.hhtxt||''
+    }));
+    [...document.querySelectorAll('#area option')].slice(1).forEach(o=>o.remove());
+    [...document.querySelectorAll('#cat option')].slice(1).forEach(o=>o.remove());
+    [...new Set(R.map(x=>x.a))].sort().forEach(a=>{const o=document.createElement('option');o.value=a;o.textContent="📍 "+a;areaSel.appendChild(o);});
+    [...new Set(R.map(x=>x.c))].sort().forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent="🍽️ "+c;catSel.appendChild(o);});
+  }
+  if(Array.isArray(d.events) && d.events.length){
+    ENT = d.events.slice(0,3).map(e=>({sq:e.sq||'The Villages',act:e.act||'',genre:e.genre||''}));
+    document.getElementById('ent').innerHTML = ENT.map(e=>`
+      <div class="square"><h3>${e.sq}</h3><div class="when">Tonight · 5:00-9:00pm</div>
+      <div class="act">🎵 ${e.act}</div><div class="genre">${e.genre}</div></div>`).join('');
+  }
+  if(Array.isArray(d.updates) && d.updates.length){ UPDATES=d.updates; renderUpdates(); }
+  if(Array.isArray(d.news) && d.news.length){
+    NEWS = d.news.map(n=>({title:n.title, date:n.date||'', link:n.link||'#'}));
+    renderBuzz();
+  }
+  if(d.weather){document.getElementById('wx').innerHTML="☀️ Patio weather today: <b>"+d.weather.temp+"°"+(d.weather.unit||'F')+" · "+d.weather.short+"</b>";}
+  tick(); render();
+}).catch(()=>{});
+
+
+let UPDATES = [
+  {kind:"closing",text:"The Fenney Grill served its last meals July 19 — first restaurant in the Fenney area, open since 2017",link:"https://www.villages-news.com/"},
+  {kind:"news",text:"Square music is on summer hours — 6 to 10 p.m. nightly through late September",link:"https://www.thevillagesentertainment.com/nightly-entertainment/"},
+  {kind:"news",text:"Brownwood Farmers Market runs Saturdays 9am–1pm all summer",link:"https://www.thevillages.com/whats-new/health-wellness/visit-brownwood-farmers-market/"},
+  {kind:"news",text:"Market Nights return the first full week of each month on all three squares",link:"https://www.thevillagesentertainment.com/hometown-market/"},
+];
+function renderUpdates(){
+  const map={opening:["t-open","Opening"],closing:["t-close","Closing"],correction:["t-fix","Correction"],news:["t-news","News"]};
+  const el=document.getElementById('ups'); if(!el) return;
+  el.innerHTML = UPDATES.slice(0,8).map(u=>{const m=map[u.kind]||map.news;
+    return `<div class="up"><span class="tag ${m[0]}">${m[1]}</span><a href="${u.link||'#'}" target="_blank" rel="noopener">${u.text}</a></div>`;}).join('');
+}
+renderUpdates();
+
+</script>
+</body>
+</html>
