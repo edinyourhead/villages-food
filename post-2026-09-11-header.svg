@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 700" width="1600" height="700" role="img" aria-label="Illustration of a Villages town square bandstand at dusk with string lights, palm trees and a saxophone">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2b1f5c"/>
+      <stop offset="0.45" stop-color="#8a3f7a"/>
+      <stop offset="0.75" stop-color="#e8794f"/>
+      <stop offset="1" stop-color="#f7c46b"/>
+    </linearGradient>
+    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a2a44"/>
+      <stop offset="1" stop-color="#1e1630"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fff2c2"/>
+      <stop offset="1" stop-color="#f7c46b" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="bulb" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fff7d6"/>
+      <stop offset="0.5" stop-color="#ffd978" stop-opacity="0.8"/>
+      <stop offset="1" stop-color="#ffd978" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="700" fill="url(#sky)"/>
+  <circle cx="1180" cy="470" r="180" fill="url(#sun)"/>
+  <circle cx="1180" cy="470" r="70" fill="#ffe9a8"/>
+  <ellipse cx="820" cy="520" rx="720" ry="26" fill="#f2b45a" opacity="0.35"/>
+  <!-- ground -->
+  <rect x="0" y="520" width="1600" height="180" fill="url(#ground)"/>
+  <ellipse cx="800" cy="560" rx="620" ry="34" fill="#2a2036"/>
+  <!-- bandstand -->
+  <g>
+    <ellipse cx="800" cy="548" rx="260" ry="22" fill="#4a3856"/>
+    <rect x="560" y="470" width="480" height="70" rx="8" fill="#5d4670"/>
+    <rect x="560" y="470" width="480" height="10" fill="#7a5f8f"/>
+    <g fill="#f4ead7">
+      <rect x="590" y="300" width="14" height="170"/>
+      <rect x="690" y="300" width="14" height="170"/>
+      <rect x="790" y="300" width="14" height="170"/>
+      <rect x="890" y="300" width="14" height="170"/>
+      <rect x="990" y="300" width="14" height="170"/>
+    </g>
+    <path d="M540 310 L800 190 L1060 310 Z" fill="#8d2f3f"/>
+    <path d="M556 310 L800 205 L1044 310 Z" fill="#b23d50"/>
+    <rect x="540" y="306" width="520" height="14" rx="4" fill="#f4ead7"/>
+    <rect x="770" y="160" width="60" height="40" rx="6" fill="#f4ead7"/>
+    <path d="M770 160 L800 135 L830 160 Z" fill="#b23d50"/>
+    <rect x="600" y="400" width="400" height="70" fill="#3a2a44" opacity="0.55"/>
+  </g>
+  <!-- string lights -->
+  <g stroke="#f4ead7" stroke-width="2" fill="none" opacity="0.9">
+    <path d="M120 250 Q400 330 680 250"/>
+    <path d="M680 250 Q960 330 1240 250"/>
+    <path d="M1240 250 Q1400 300 1560 240"/>
+  </g>
+  <g>
+    <circle cx="200" cy="280" r="16" fill="url(#bulb)"/>
+    <circle cx="300" cy="303" r="16" fill="url(#bulb)"/>
+    <circle cx="400" cy="310" r="16" fill="url(#bulb)"/>
+    <circle cx="500" cy="303" r="16" fill="url(#bulb)"/>
+    <circle cx="600" cy="280" r="16" fill="url(#bulb)"/>
+    <circle cx="760" cy="280" r="16" fill="url(#bulb)"/>
+    <circle cx="860" cy="303" r="16" fill="url(#bulb)"/>
+    <circle cx="960" cy="310" r="16" fill="url(#bulb)"/>
+    <circle cx="1060" cy="303" r="16" fill="url(#bulb)"/>
+    <circle cx="1160" cy="280" r="16" fill="url(#bulb)"/>
+    <circle cx="1320" cy="270" r="16" fill="url(#bulb)"/>
+    <circle cx="1440" cy="272" r="16" fill="url(#bulb)"/>
+    <g fill="#fff3c4">
+      <circle cx="200" cy="280" r="5"/><circle cx="300" cy="303" r="5"/><circle cx="400" cy="310" r="5"/><circle cx="500" cy="303" r="5"/><circle cx="600" cy="280" r="5"/><circle cx="760" cy="280" r="5"/><circle cx="860" cy="303" r="5"/><circle cx="960" cy="310" r="5"/><circle cx="1060" cy="303" r="5"/><circle cx="1160" cy="280" r="5"/><circle cx="1320" cy="270" r="5"/><circle cx="1440" cy="272" r="5"/>
+    </g>
+  </g>
+  <!-- palms left -->
+  <g fill="#1c1430">
+    <path d="M150 560 C150 420 160 330 175 240 L195 240 C185 330 178 420 180 560 Z"/>
+    <path d="M185 245 C120 200 60 210 20 250 C90 235 140 245 185 262 Z"/>
+    <path d="M185 245 C130 170 90 150 40 160 C100 175 150 205 185 258 Z"/>
+    <path d="M185 245 C250 190 320 195 360 235 C300 225 240 240 190 260 Z"/>
+    <path d="M185 245 C200 170 240 130 300 120 C250 150 220 200 195 258 Z"/>
+    <path d="M185 245 C170 175 130 140 75 130 C130 160 165 200 182 258 Z"/>
+  </g>
+  <!-- palms right -->
+  <g fill="#1c1430">
+    <path d="M1430 560 C1435 430 1425 340 1410 250 L1390 250 C1400 340 1405 430 1400 560 Z"/>
+    <path d="M1400 255 C1340 210 1270 215 1230 255 C1300 240 1355 250 1400 270 Z"/>
+    <path d="M1400 255 C1450 180 1500 160 1560 170 C1500 185 1450 215 1402 268 Z"/>
+    <path d="M1400 255 C1470 205 1540 210 1590 250 C1520 235 1460 250 1405 268 Z"/>
+    <path d="M1400 255 C1380 180 1340 145 1280 140 C1335 165 1370 205 1398 268 Z"/>
+    <path d="M1400 255 C1410 180 1450 140 1510 130 C1460 160 1425 205 1402 268 Z"/>
+  </g>
+  <!-- silhouette crowd -->
+  <g fill="#1e1630">
+    <circle cx="380" cy="560" r="14"/><rect x="366" y="572" width="28" height="60" rx="8"/>
+    <circle cx="430" cy="566" r="14"/><rect x="416" y="578" width="28" height="56" rx="8"/>
+    <circle cx="1170" cy="560" r="14"/><rect x="1156" y="572" width="28" height="60" rx="8"/>
+    <circle cx="1225" cy="568" r="14"/><rect x="1211" y="580" width="28" height="54" rx="8"/>
+    <circle cx="1275" cy="562" r="14"/><rect x="1261" y="574" width="28" height="58" rx="8"/>
+  </g>
+  <!-- saxophone player silhouette on stage -->
+  <g fill="#1e1630">
+    <circle cx="800" cy="372" r="16"/>
+    <rect x="784" y="386" width="32" height="70" rx="10"/>
+    <path d="M812 405 C840 410 850 430 846 452 C842 468 826 470 818 462 C826 452 828 440 820 430 C814 424 810 420 812 405 Z" fill="#f2b45a"/>
+    <circle cx="840" cy="456" r="9" fill="#f2b45a"/>
+  </g>
+  <!-- title text -->
+  <text x="800" y="640" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="46" fill="#f4ead7" opacity="0.95">This Weekend on the Squares</text>
+  <text x="800" y="680" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#f4ead7" opacity="0.75" letter-spacing="3">THE VILLAGES · SEPTEMBER 11 TO 13</text>
+</svg>

@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 700" width="1600" height="700" role="img" aria-label="Illustration of a Villages town square at dusk with a classic car show, string lights, palm trees and a bandstand">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1f2a5c"/>
+      <stop offset="0.45" stop-color="#5b4a8a"/>
+      <stop offset="0.75" stop-color="#e07a5f"/>
+      <stop offset="1" stop-color="#f6c66a"/>
+    </linearGradient>
+    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a2f4a"/>
+      <stop offset="1" stop-color="#1c1730"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fff3c9"/>
+      <stop offset="1" stop-color="#f6c66a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="bulb" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fff7d6"/>
+      <stop offset="0.5" stop-color="#ffd978" stop-opacity="0.8"/>
+      <stop offset="1" stop-color="#ffd978" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="700" fill="url(#sky)"/>
+  <circle cx="420" cy="460" r="190" fill="url(#sun)"/>
+  <circle cx="420" cy="460" r="72" fill="#ffe9a8"/>
+  <ellipse cx="800" cy="522" rx="760" ry="24" fill="#f2b45a" opacity="0.35"/>
+  <rect x="0" y="520" width="1600" height="180" fill="url(#ground)"/>
+  <g>
+    <ellipse cx="1180" cy="548" rx="230" ry="20" fill="#4a3856"/>
+    <rect x="980" y="475" width="400" height="66" rx="8" fill="#5d4670"/>
+    <rect x="980" y="475" width="400" height="10" fill="#7a5f8f"/>
+    <g fill="#f4ead7">
+      <rect x="1005" y="320" width="12" height="155"/>
+      <rect x="1095" y="320" width="12" height="155"/>
+      <rect x="1185" y="320" width="12" height="155"/>
+      <rect x="1275" y="320" width="12" height="155"/>
+      <rect x="1365" y="320" width="12" height="155"/>
+    </g>
+    <path d="M965 330 L1180 220 L1395 330 Z" fill="#8d2f3f"/>
+    <path d="M980 330 L1180 235 L1380 330 Z" fill="#b23d50"/>
+    <rect x="965" y="326" width="430" height="12" rx="4" fill="#f4ead7"/>
+    <rect x="1000" y="405" width="360" height="70" fill="#3a2a44" opacity="0.55"/>
+    <g fill="#1e1630">
+      <circle cx="1180" cy="388" r="15"/>
+      <rect x="1165" y="401" width="30" height="66" rx="10"/>
+      <path d="M1150 430 L1215 445 L1212 458 L1147 443 Z"/>
+      <ellipse cx="1210" cy="452" rx="16" ry="12"/>
+    </g>
+  </g>
+  <g stroke="#f4ead7" stroke-width="2" fill="none" opacity="0.9">
+    <path d="M60 240 Q360 320 660 240"/>
+    <path d="M660 240 Q960 320 1260 240"/>
+    <path d="M1260 240 Q1420 290 1580 230"/>
+  </g>
+  <g>
+    <g fill="url(#bulb)">
+      <circle cx="160" cy="268" r="16"/><circle cx="260" cy="292" r="16"/><circle cx="360" cy="300" r="16"/><circle cx="460" cy="292" r="16"/><circle cx="560" cy="268" r="16"/>
+      <circle cx="760" cy="268" r="16"/><circle cx="860" cy="292" r="16"/><circle cx="960" cy="300" r="16"/><circle cx="1060" cy="292" r="16"/><circle cx="1160" cy="268" r="16"/>
+      <circle cx="1340" cy="262" r="16"/><circle cx="1460" cy="262" r="16"/>
+    </g>
+    <g fill="#fff3c4">
+      <circle cx="160" cy="268" r="5"/><circle cx="260" cy="292" r="5"/><circle cx="360" cy="300" r="5"/><circle cx="460" cy="292" r="5"/><circle cx="560" cy="268" r="5"/>
+      <circle cx="760" cy="268" r="5"/><circle cx="860" cy="292" r="5"/><circle cx="960" cy="300" r="5"/><circle cx="1060" cy="292" r="5"/><circle cx="1160" cy="268" r="5"/>
+      <circle cx="1340" cy="262" r="5"/><circle cx="1460" cy="262" r="5"/>
+    </g>
+  </g>
+  <g>
+    <ellipse cx="520" cy="590" rx="330" ry="26" fill="#14102a" opacity="0.6"/>
+    <path d="M250 560 L270 500 L330 470 L560 470 L640 505 L760 520 L790 560 Z" fill="#c8323f"/>
+    <path d="M335 476 L555 476 L615 505 L305 505 Z" fill="#8fd3f4" opacity="0.85"/>
+    <rect x="440" y="470" width="8" height="35" fill="#c8323f"/>
+    <rect x="250" y="540" width="540" height="22" rx="6" fill="#a8232f"/>
+    <rect x="240" y="556" width="560" height="10" rx="5" fill="#e6e6e6"/>
+    <circle cx="340" cy="566" r="34" fill="#1e1630"/>
+    <circle cx="340" cy="566" r="16" fill="#e6e6e6"/>
+    <circle cx="700" cy="566" r="34" fill="#1e1630"/>
+    <circle cx="700" cy="566" r="16" fill="#e6e6e6"/>
+    <circle cx="775" cy="532" r="9" fill="#fff3c4"/>
+    <path d="M540 522 L600 522 L600 534 L540 534 Z" fill="#e6e6e6"/>
+  </g>
+  <g opacity="0.9">
+    <path d="M60 545 L80 505 L130 485 L250 485 L300 505 L320 545 Z" fill="#3f8f7f"/>
+    <path d="M135 490 L245 490 L280 505 L110 505 Z" fill="#8fd3f4" opacity="0.8"/>
+    <rect x="60" y="536" width="260" height="14" rx="5" fill="#2f6f63"/>
+    <circle cx="110" cy="550" r="22" fill="#1e1630"/><circle cx="110" cy="550" r="10" fill="#e6e6e6"/>
+    <circle cx="270" cy="550" r="22" fill="#1e1630"/><circle cx="270" cy="550" r="10" fill="#e6e6e6"/>
+  </g>
+  <g fill="#1c1430">
+    <path d="M1480 560 C1485 430 1475 340 1460 250 L1440 250 C1450 340 1455 430 1450 560 Z"/>
+    <path d="M1450 255 C1390 210 1320 215 1280 255 C1350 240 1405 250 1450 270 Z"/>
+    <path d="M1450 255 C1500 180 1550 160 1600 170 C1545 185 1500 215 1452 268 Z"/>
+    <path d="M1450 255 C1430 180 1390 145 1330 140 C1385 165 1420 205 1448 268 Z"/>
+    <path d="M1450 255 C1460 180 1500 140 1560 130 C1510 160 1475 205 1452 268 Z"/>
+  </g>
+  <g fill="#1c1430">
+    <path d="M880 520 C880 430 890 350 905 270 L923 270 C913 350 906 430 908 520 Z"/>
+    <path d="M913 275 C850 235 790 245 750 285 C820 270 870 280 913 292 Z"/>
+    <path d="M913 275 C860 205 820 185 770 195 C830 210 880 240 913 288 Z"/>
+    <path d="M913 275 C975 225 1040 230 1080 270 C1020 260 960 272 918 290 Z"/>
+    <path d="M913 275 C925 205 965 170 1020 160 C970 190 940 235 921 288 Z"/>
+  </g>
+  <g fill="#1e1630">
+    <circle cx="860" cy="556" r="13"/><rect x="847" y="567" width="26" height="58" rx="8"/>
+    <circle cx="905" cy="562" r="13"/><rect x="892" y="573" width="26" height="54" rx="8"/>
+    <circle cx="1420" cy="558" r="13"/><rect x="1407" y="569" width="26" height="58" rx="8"/>
+    <circle cx="1470" cy="564" r="13"/><rect x="1457" y="575" width="26" height="52" rx="8"/>
+  </g>
+  <text x="800" y="645" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="46" fill="#f4ead7" opacity="0.95">Cars, Bands and a Tom Petty Night</text>
+  <text x="800" y="683" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#f4ead7" opacity="0.75" letter-spacing="3">THE VILLAGES · SEPTEMBER 25 TO 27</text>
+</svg>
