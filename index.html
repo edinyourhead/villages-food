@@ -131,6 +131,25 @@
   .ask-band-thanks{background:#fff;border-radius:12px;padding:18px 20px;color:var(--navy);font-size:17px;line-height:1.5;font-weight:600;box-shadow:0 4px 14px rgba(11,61,92,.12)}
   @media(max-width:760px){.ask-band-in{grid-template-columns:1fr;gap:18px}.ask-band-h{font-size:32px}.ask-band-photo{width:84px;height:84px}}
 </style>
+
+<style id="sub-css">
+.sub-btn{display:inline-flex;align-items:center;gap:6px;background:#C9971C;color:#3a2c00!important;border:none;font:inherit;font-weight:800;font-size:15px;padding:9px 16px;border-radius:999px;cursor:pointer;text-decoration:none!important;white-space:nowrap;line-height:1.2;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.nav .sub-btn{margin-left:16px}
+.sub-btn:hover{filter:brightness(1.06)}
+.sub-panel{background:#fff;border-bottom:3px solid #C9971C;box-shadow:0 6px 18px rgba(11,61,92,.12);position:relative;z-index:40}
+.sub-panel[hidden]{display:none}
+.sub-in{max-width:760px;margin:0 auto;padding:18px}
+.sub-in h3{font-size:20px;color:#0B3D5C;margin:0 0 4px}
+.sub-in p{color:#566573;font-size:15px;margin:0 0 12px}
+.sub-form{display:flex;gap:10px;flex-wrap:wrap}
+.sub-form input[type=text],.sub-form input[type=email]{flex:1;min-width:160px;padding:12px 13px;border:1.5px solid #D9E2E7;border-radius:10px;font-size:16px;font-family:inherit;color:#1B2631;background:#fff}
+.sub-form input:focus{outline:none;border-color:#C9971C}
+.sub-form button{background:#0B3D5C;color:#fff;border:none;font-weight:800;font-size:16px;padding:12px 20px;border-radius:10px;cursor:pointer}
+.sub-hp{position:absolute!important;left:-9999px;top:-9999px}
+.sub-x{float:right;background:none;border:none;font-size:24px;line-height:1;color:#566573;cursor:pointer}
+.sub-thanks{color:#0B3D5C;font-weight:700;font-size:17px;padding:6px 0}
+.sub-err{color:#9b2222;font-size:14px;margin-top:6px}
+</style>
 </head>
 <body>
 
@@ -142,9 +161,24 @@
       <div class="logo">The Villages <span>Food</span></div>
       <div class="tagline">What's good to eat in The Villages, right now.</div>
     </div>
-    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap"><a href='https://thevillagescatalogue.com' style='color:#fff;background:rgba(255,255,255,.15);padding:8px 14px;border-radius:999px;font-weight:700;font-size:15px;text-decoration:none'>🔧 Services Directory</a><a href='/blog' style='color:#fff;background:rgba(255,255,255,.15);padding:8px 14px;border-radius:999px;font-weight:700;font-size:15px;text-decoration:none'>📝 Blog</a><div class="clock" id="clock">🕐 —</div></div>
+    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap"><a href='https://thevillagescatalogue.com' style='color:#fff;background:rgba(255,255,255,.15);padding:8px 14px;border-radius:999px;font-weight:700;font-size:15px;text-decoration:none'>🔧 Services Directory</a><a href='/blog' style='color:#fff;background:rgba(255,255,255,.15);padding:8px 14px;border-radius:999px;font-weight:700;font-size:15px;text-decoration:none'>📝 Blog</a><button type="button" class="sub-btn" onclick="subToggle()" aria-controls="subscribe">&#9993; Subscribe</button><div class="clock" id="clock">🕐 —</div></div>
   </div>
 </header>
+<div class="sub-panel" id="subscribe" hidden>
+  <div class="sub-in">
+    <button type="button" class="sub-x" aria-label="Close" onclick="subToggle(false)">&times;</button>
+    <h3>Get Susan&rsquo;s Dining Digest</h3>
+    <p>New spots, the best happy hours, and who&rsquo;s playing the squares. Free. Just your email, and a first name if you like.</p>
+    <form name="dining-digest" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="/" class="sub-form">
+  <input type="hidden" name="form-name" value="dining-digest">
+  <input type="hidden" name="source" value="header">
+  <p class="sub-hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+  <input type="text" name="name" placeholder="First name (optional)" autocomplete="given-name" aria-label="First name (optional)">
+  <input type="email" name="email" placeholder="your@email.com" required autocomplete="email" aria-label="Email address">
+  <button type="submit">Subscribe</button>
+</form>
+  </div>
+</div>
 
 <div class="hero">
   <div class="wrap">
@@ -259,11 +293,15 @@
 <section style="padding-top:4px">
   <div class="wrap news">
     <h2>📬 The Villages Dining Digest</h2>
-    <p class="sub" style="margin-bottom:0">One email a week: new spots, this week's best happy hours, and who's playing the squares. Free.</p>
-    <div class="f">
-      <input id="email" type="email" placeholder="your@email.com">
-      <button class="btn" onclick="subscribe()">Subscribe free</button>
-    </div>
+    <p class="sub" style="margin-bottom:0">Get on the list for new spots, the best happy hours, and who's playing the squares. Free.</p>
+    <form name="dining-digest" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="/" class="sub-form">
+  <input type="hidden" name="form-name" value="dining-digest">
+  <input type="hidden" name="source" value="footer">
+  <p class="sub-hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+  <input type="text" name="name" placeholder="First name (optional)" autocomplete="given-name" aria-label="First name (optional)">
+  <input type="email" name="email" placeholder="your@email.com" required autocomplete="email" aria-label="Email address">
+  <button type="submit">Subscribe</button>
+</form>
   </div>
 </section>
 
@@ -500,6 +538,17 @@ function renderUpdates(){
 }
 renderUpdates();
 
+</script>
+
+<script id="sub-js">
+function subToggle(show){var p=document.getElementById('subscribe');if(!p)return;if(show===undefined)show=p.hidden;p.hidden=!show;if(show){var e=p.querySelector('input[type=email]');if(e)setTimeout(function(){e.focus()},50);}}
+document.addEventListener('submit',function(ev){var f=ev.target;if(!f.classList||!f.classList.contains('sub-form'))return;ev.preventDefault();
+  var b=f.querySelector('button');if(b){b.disabled=true;b.textContent='Sending...';}
+  fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(f)).toString()})
+  .then(function(r){if(!r.ok)throw 0;f.outerHTML='<div class="sub-thanks">You&rsquo;re on the list. Thanks for signing up, neighbor. Susan</div>';})
+  .catch(function(){if(b){b.disabled=false;b.textContent='Subscribe';}var m=f.querySelector('.sub-err');if(!m){m=document.createElement('div');m.className='sub-err';f.appendChild(m);}m.textContent='That did not go through. Please try again.';});
+});
+if(location.hash==='#subscribe'){subToggle(true);}
 </script>
 </body>
 </html>
